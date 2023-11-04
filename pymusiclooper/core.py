@@ -7,7 +7,7 @@ import taglib
 
 from .analysis import find_best_loop_points
 from .audio import MLAudio
-from .playback import PlaybackHandler
+# from .playback import PlaybackHandler
 
 
 class MusicLooper:
@@ -79,16 +79,17 @@ class MusicLooper:
             loop_start (int): Index of the loop start (in samples)
             loop_end (int): Index of the loop end (in samples)
             start_from (int, optional): Index of the sample point to start from. Defaults to 0.
+            playback_handler = PlaybackHandler()
+            playback_handler.play_looping(
+                self.mlaudio.playback_audio,
+                self.mlaudio.rate,
+                self.mlaudio.n_channels,
+                loop_start,
+                loop_end,
+                start_from,
+            )
         """
-        playback_handler = PlaybackHandler()
-        playback_handler.play_looping(
-            self.mlaudio.playback_audio,
-            self.mlaudio.rate,
-            self.mlaudio.n_channels,
-            loop_start,
-            loop_end,
-            start_from,
-        )
+        return
 
     def export(self, loop_start, loop_end, format="WAV", output_dir=None):
         if output_dir is not None:
