@@ -32,6 +32,7 @@ class MLAudio:
         try:
             raw_audio, sampling_rate = librosa.load(filepath, sr=None, mono=False)
         except Exception as e:
+            raise AudioLoadError(f"Error loading {os.path.basename(filepath)}: {e}") from e
             raise AudioLoadError(f"{os.path.basename(filepath)} could not be loaded. It might not contain valid audio data, or is in an supported format.") from e
 
         self.total_duration = librosa.get_duration(y=raw_audio, sr=sampling_rate)
